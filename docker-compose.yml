@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    ports:
+      - 5444:5436
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: article-park
+    networks:
+      - article-park-network
+networks:
+  article-park-network:
+    driver: bridge
+volumes:
+  article-park-data:
+    driver: local

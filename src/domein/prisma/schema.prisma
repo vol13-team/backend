@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  UserID        Int       @id
+  UserID        Int       @id(@default(uuid()))
   UserName      String
   UserIcon      String?
   created_at    DateTime
