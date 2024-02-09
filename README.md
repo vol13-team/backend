@@ -58,18 +58,32 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
 # backend
-# backend
+
+# directly
+
+クリーンアーキテクチャの考え方に沿って設計していく
+試行中
+
+```
+src
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├── controller  //routind
+├── domein
+│   ├── decorators //自作デコレーター
+│   ├── filters //errハンドリング
+│   ├── metadata 
+│   ├── middleware //認証等ミドルウェア
+│   │   ├── guards
+│   │   └── strategies
+│   ├── prisma
+│   ├── repository //DB操作系
+│   └── service  //ビジネスロジック
+├── interface  //型
+│   ├── dto req resの型
+│   └── types //その他
+├── main.ts
+└── utils  //共通で使用するものなど
+```
