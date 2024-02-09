@@ -11,80 +11,107 @@ datasource db {
 }
 
 model User {
-  UserID        Int      @id
+  UserID        Int       @id
   UserName      String
-  UserIcon      String?
+  UserIcon      String
   created_at    DateTime
   Update_at     DateTime
+  Organisation  Organisation[]
+  Answer        Answer[]
+  UserTag       UserTag[] 
+  Article       Article[] 
 }
 
 model Issue {
   IssueID         Int       @id
   IssueName       String
-  IsuueDetail     String?
+  IsuueDetail     String
   Visibility      Boolean
   PostUserID      Int
-  explanation     String?
+  explanation     String
   created_at      DateTime
   Update_at       DateTime
   OrganisationID  Int
- 
+  OptionID        Int
+  IssueTag        IssueTag[]
+  Organisation    Organisation []
+  Answer          Answer[]
+  Option          Option @relation(fields: [OptionID], references: [OptionID])
 }
 
 model Option {
   OptionID      Int     @id
-  Option1       String?
-  Option2       String?
-  Option3       String?
-  Option4       String?
+  Option1       String
+  Option2       String
+  Option3       String
+  Option4       String
   CorrectOption Int
+  Issue         Issue[]
 }
 
 model Article {
   ArticleID       Int       @id
   ArticleTitle    String
-  ArticleLink     String?
-  ArticleUserName String
+  ArticleLink     String
+  ArticleUserName Int
+  User            User @relation(fields: [ArticleUserName], references: [UserID])
+  ArticleTag      ArticleTag[]
+  Organisation    Organisation[]
 }
 
+
+//ok
 model Answer {
   AnswerID       Int     @id
   Decision       Boolean
   IssueID        Int
   AnserUserID    Int
   selectOptionID Int
+  User           User @relation(fields: [AnserUserID], references: [UserID])
+  Issue          Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
 model Organisation {
   OrganisationID Int       @id
   OrganisationName String
-  discruption     String?
-  authority       String?
+  discruption     String
+  authority       String
   UserID          Int
   ArticleID       Int
-
+  IssueID         Int
+  User            User @relation(fields: [UserID], references: [UserID])
+  Article         Article @relation(fields: [ArticleID], references: [ArticleID])
+  Issue           Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
 model Tag {
   TagID      Int       @id
   tagName    String
-
+  IssueTag   IssueTag[]
+  ArticleTag ArticleTag[]
+  UserTag    UserTag []
 }
 
 model UserTag {
   UserTagID Int   @id
   UserID    Int
   TagID     Int
+  User      User @relation(fields: [UserID], references: [UserID])
+  Tag       Tag @relation(fields: [TagID], references: [TagID])
 }
 
 model ArticleTag {
   ArticleTagID Int     @id
   ArticleID    Int
   TagID        Int
+  Article      Article @relation(fields: [ArticleID], references: [ArticleID])
+  Tag          Tag @relation(fields: [TagID], references: [TagID])
 }
 
 model IssueTag {
   IssueTagID Int   @id
   IssueID    Int
   TagID      Int
+  Issue      Issue @relation(fields: [IssueID], references: [IssueID])
+  Tag        Tag @relation(fields: [TagID], references: [TagID])
 }
