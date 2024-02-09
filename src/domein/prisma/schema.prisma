@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  UserID        Int       @id
+  UserName      String
+  UserIcon      String?
+  created_at    DateTime
+  Update_at     DateTime
+}
+
+model Issue {
+  IssueID         Int       @id
+  IssueName       String
+  IsuueDetail     String?
+  Visibility      Boolean
+  PostUserID      Int
+  explanation     String?
+  created_at      DateTime
+  Update_at       DateTime
+  OrganisationID  Int
+ 
+}
+
+model Option {
+  OptionID      Int     @id
+  Option1       String?
+  Option2       String?
+  Option3       String?
+  Option4       String?
+  CorrectOption Int
+}
+
+model Article {
+  ArticleID       Int       @id
+  ArticleTitle    String
+  ArticleLink     String?
+  ArticleUserName String
+}
+
+model Answer {
+  AnswerID       Int     @id
+  Decision       Boolean
+  IssueID        Int
+  AnserUserID    Int
+  selectOptionID Int
+}
+
+model Organisation {
+  OrganisationID Int       @id
+  OrganisationName String
+  discruption     String?
+  authority       String?
+  UserID          Int
+  ArticleID       Int
+
+}
+
+model Tag {
+  TagID      Int       @id
+  tagName    String
+
+}
+
+model UserTag {
+  UserTagID Int   @id
+  UserID    Int
+  TagID     Int
+}
+
+model ArticleTag {
+  ArticleTagID Int     @id
+  ArticleID    Int
+  TagID        Int
+}
+
+model IssueTag {
+  IssueTagID Int   @id
+  IssueID    Int
+  TagID      Int
+}
