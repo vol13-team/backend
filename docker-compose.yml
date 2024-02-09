@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:13
     ports:
-      - 5444:5436
+      - 5444:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -13,6 +13,3 @@ services:
 networks:
   article-park-network:
     driver: bridge
-volumes:
-  article-park-data:
-    driver: local
