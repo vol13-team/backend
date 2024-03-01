@@ -19,6 +19,7 @@ model User {
   Organisation  Organisation[]
   Answer        Answer[]
   UserTag       UserTag[] 
+  Issue         Issue[] 
   Article       Article[] 
 }
 
@@ -33,6 +34,7 @@ model Issue {
   Update_at       DateTime
   OrganisationID  Int
   OptionID        Int
+  User            User @relation(fields: [PostUserID], references: [UserID])
   IssueTag        IssueTag[]
   Organisation    Organisation []
   Answer          Answer[]
