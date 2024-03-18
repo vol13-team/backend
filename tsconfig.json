@@ -19,5 +19,5 @@
     "noFallthroughCasesInSwitch": false
   },
 
-  "include": ["src/**/*.ts", "dist/**/*.js"]
+  "include": ["src/**/*.ts", "dist/**/*.ts", "test/**/*.ts"]
 }
