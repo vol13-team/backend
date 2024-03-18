@@ -1,4 +1,4 @@
-name: CI for ReactJS App
+name: CI for NestJS
 
 on:
   push:
@@ -17,6 +17,9 @@ jobs:
 
       - name: Lint code
         run: npm run lint
+
+      - name: Format code
+        run: npm run format
 
       - name: Build for production
         run: npm run build
