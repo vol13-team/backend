@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,11 +8,9 @@ datasource db {
 }
 
 model User {
-  UserID        Int       @id
+  UserID        String  @id @default(uuid())
   UserName      String
   UserIcon      String
-  created_at    DateTime
-  Update_at     DateTime
   Organisation  Organisation[]
   Answer        Answer[]
   UserTag       UserTag[] 
@@ -23,16 +18,16 @@ model User {
 }
 
 model Issue {
-  IssueID         Int       @id
+  IssueID         String @id @default(uuid())
   IssueName       String
   IsuueDetail     String
   Visibility      Boolean
-  PostUserID      Int
+  PostUserID      String
   explanation     String
   created_at      DateTime
   Update_at       DateTime
-  OrganisationID  Int
-  OptionID        Int
+  OrganisationID  String
+  OptionID        String
   IssueTag        IssueTag[]
   Organisation    Organisation []
   Answer          Answer[]
@@ -40,7 +35,7 @@ model Issue {
 }
 
 model Option {
-  OptionID      Int     @id
+  OptionID      String @id @default(uuid())
   Option1       String
   Option2       String
   Option3       String
@@ -50,42 +45,40 @@ model Option {
 }
 
 model Article {
-  ArticleID       Int       @id
+  ArticleID       String @id @default(uuid())
   ArticleTitle    String
   ArticleLink     String
-  ArticleUserName Int
+  ArticleUserName String
   User            User @relation(fields: [ArticleUserName], references: [UserID])
   ArticleTag      ArticleTag[]
   Organisation    Organisation[]
 }
 
-
-//ok
 model Answer {
-  AnswerID       Int     @id
+  AnswerID       String @id @default(uuid())
   Decision       Boolean
-  IssueID        Int
-  AnserUserID    Int
-  selectOptionID Int
+  IssueID        String
+  AnserUserID    String
+  selectOptionID String
   User           User @relation(fields: [AnserUserID], references: [UserID])
   Issue          Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
 model Organisation {
-  OrganisationID Int       @id
+  OrganisationID String @id @default(uuid())
   OrganisationName String
   discruption     String
   authority       String
-  UserID          Int
-  ArticleID       Int
-  IssueID         Int
+  UserID          String
+  ArticleID       String
+  IssueID         String
   User            User @relation(fields: [UserID], references: [UserID])
   Article         Article @relation(fields: [ArticleID], references: [ArticleID])
   Issue           Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
 model Tag {
-  TagID      Int       @id
+  TagID      String @id @default(uuid())
   tagName    String
   IssueTag   IssueTag[]
   ArticleTag ArticleTag[]
@@ -93,25 +86,25 @@ model Tag {
 }
 
 model UserTag {
-  UserTagID Int   @id
-  UserID    Int
-  TagID     Int
+  UserTagID String @id @default(uuid())
+  UserID    String
+  TagID     String
   User      User @relation(fields: [UserID], references: [UserID])
   Tag       Tag @relation(fields: [TagID], references: [TagID])
 }
 
 model ArticleTag {
-  ArticleTagID Int     @id
-  ArticleID    Int
-  TagID        Int
+  ArticleTagID String @id @default(uuid())
+  ArticleID    String
+  TagID        String
   Article      Article @relation(fields: [ArticleID], references: [ArticleID])
   Tag          Tag @relation(fields: [TagID], references: [TagID])
 }
 
 model IssueTag {
-  IssueTagID Int   @id
-  IssueID    Int
-  TagID      Int
+  IssueTagID String @id @default(uuid())
+  IssueID    String
+  TagID      String
   Issue      Issue @relation(fields: [IssueID], references: [IssueID])
   Tag        Tag @relation(fields: [TagID], references: [TagID])
 }
