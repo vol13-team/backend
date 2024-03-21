@@ -20,13 +20,11 @@ model User {
 model Issue {
   IssueID         String @id @default(uuid())
   IssueName       String
-  IsuueDetail     String
+  IssueDetail     String
   Visibility      Boolean
   PostUserID      String
-  explanation     String
-  created_at      DateTime
-  Update_at       DateTime
-  OrganisationID  String
+  Explanation     String
+  OrganisationID  String?
   OptionID        String
   IssueTag        IssueTag[]
   Organisation    Organisation []
@@ -59,7 +57,7 @@ model Answer {
   Decision       Boolean
   IssueID        String
   AnserUserID    String
-  selectOptionID String
+  SelectOptionID String
   User           User @relation(fields: [AnserUserID], references: [UserID])
   Issue          Issue @relation(fields: [IssueID], references: [IssueID])
 }
