@@ -11,7 +11,7 @@ model User {
   UserID        String  @id @default(uuid())
   UserName      String
   UserIcon      String
-  Organisation  Organisation[]
+  Organization  Organization[]
   Answer        Answer[]
   UserTag       UserTag[] 
   Article       Article[] 
@@ -24,14 +24,14 @@ model Issue {
   Visibility      Boolean
   PostUserID      String
   Explanation     String
-  OrganisationID  String?
+  OrganizationID  String?
   OptionID        String?
   ArticleID       String
   IssueTag        IssueTag[]
   Answer          Answer[]
   Option          Option? @relation(fields: [OptionID], references: [OptionID])
   Article         Article @relation(fields: [ArticleID], references: [ArticleID])
-  Organisation    Organisation? @relation(fields: [OrganisationID], references: [OrganisationID])
+  Organization    Organization? @relation(fields: [OrganizationID], references: [OrganizationID])
 }
 
 model Option {
@@ -52,7 +52,7 @@ model Article {
   User            User @relation(fields: [ArticleUserName], references: [UserID])
   Issue          Issue[]
   ArticleTag      ArticleTag[]
-  Organisation    Organisation[]
+  Organization    Organization[]
 }
 
 model Answer {
@@ -65,11 +65,11 @@ model Answer {
   Issue          Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
-model Organisation {
-  OrganisationID String @id @default(uuid())
-  OrganisationName String
-  discruption     String
-  authority       String
+model Organization {
+  OrganizationID String @id @default(uuid())
+  OrganizationName String
+  Description     String
+  Authority       String
   UserID          String?
   ArticleID       String?
   Issue          Issue[] 
