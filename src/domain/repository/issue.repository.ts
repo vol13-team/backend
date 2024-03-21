@@ -40,7 +40,6 @@ export class AppService {
     IssueName: string,
     IssueDetail: string,
     Visibility: boolean,
-    PostUserID: string,
     explanation: string
   ): Promise<Issue> {
     const issue = await this.prismaService.issue.update({
