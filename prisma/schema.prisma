@@ -25,11 +25,13 @@ model Issue {
   PostUserID      String
   Explanation     String
   OrganisationID  String?
-  OptionID        String
+  OptionID        String?
+  ArticleID       String
   IssueTag        IssueTag[]
-  Organisation    Organisation []
   Answer          Answer[]
-  Option          Option @relation(fields: [OptionID], references: [OptionID])
+  Option          Option? @relation(fields: [OptionID], references: [OptionID])
+  Article         Article @relation(fields: [ArticleID], references: [ArticleID])
+  Organisation    Organisation? @relation(fields: [OrganisationID], references: [OrganisationID])
 }
 
 model Option {
@@ -48,6 +50,7 @@ model Article {
   ArticleLink     String
   ArticleUserName String
   User            User @relation(fields: [ArticleUserName], references: [UserID])
+  Issue          Issue[]
   ArticleTag      ArticleTag[]
   Organisation    Organisation[]
 }
@@ -67,17 +70,17 @@ model Organisation {
   OrganisationName String
   discruption     String
   authority       String
-  UserID          String
-  ArticleID       String
-  IssueID         String
-  User            User @relation(fields: [UserID], references: [UserID])
-  Article         Article @relation(fields: [ArticleID], references: [ArticleID])
-  Issue           Issue @relation(fields: [IssueID], references: [IssueID])
+  UserID          String?
+  ArticleID       String?
+  Issue          Issue[] 
+  User            User? @relation(fields: [UserID], references: [UserID])
+  Article         Article? @relation(fields: [ArticleID], references: [ArticleID])
+
 }
 
 model Tag {
   TagID      String @id @default(uuid())
-  tagName    String
+  TagName    String
   IssueTag   IssueTag[]
   ArticleTag ArticleTag[]
   UserTag    UserTag []

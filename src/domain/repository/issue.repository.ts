@@ -14,6 +14,7 @@ export class AppService {
   }
 
   async createIssue(
+    ArticleID: string,
     IssueName: string,
     IssueDetail: string,
     Visibility: boolean,
@@ -25,9 +26,9 @@ export class AppService {
         IssueName: IssueName,
         IssueDetail: IssueDetail,
         Visibility: Visibility,
-        PostUserID: PostUserID,
         Explanation: explanation,
-        Option: null,
+        PostUserID: PostUserID,
+        ArticleID: ArticleID,
       },
     });
     return issue;
@@ -35,6 +36,7 @@ export class AppService {
 
   async updateIssue(
     id: string,
+    articleID: string,
     IssueName: string,
     IssueDetail: string,
     Visibility: boolean,
@@ -47,8 +49,8 @@ export class AppService {
         IssueName: IssueName,
         IssueDetail: IssueDetail,
         Visibility: Visibility,
-        PostUserID: PostUserID,
         Explanation: explanation,
+        ArticleID: articleID,
       },
     });
     return issue;
