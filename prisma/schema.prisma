@@ -59,9 +59,9 @@ model Answer {
   AnswerID       String @id @default(uuid())
   Decision       Boolean
   IssueID        String
-  AnserUserID    String
+  AnswerUserID    String
   SelectOptionID String
-  User           User @relation(fields: [AnserUserID], references: [UserID])
+  User           User @relation(fields: [AnswerUserID], references: [UserID])
   Issue          Issue @relation(fields: [IssueID], references: [IssueID])
 }
 
